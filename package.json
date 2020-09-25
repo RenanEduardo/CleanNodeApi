@@ -3,5 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Renan Eduardo F. da Silva <renaneduardo1@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "-": "^0.0.1",
+    "D": "^1.0.0",
+    "git-commit-msg-linter": "^2.7.0"
+  }
 }
