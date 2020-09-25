@@ -4,19 +4,20 @@
   "main": "index.js",
   "author": "Renan Eduardo F. da Silva <renaneduardo1@hotmail.com>",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "git-commit-msg-linter": "^2.7.0",
     "@types/node": "^14.11.2",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser":"^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
     "eslint": "6",
     "eslint-config-standard-with-typescript": "^16.0.0",
     "eslint-plugin-import": "2",
     "eslint-plugin-node": "11",
     "eslint-plugin-promise": "4",
     "eslint-plugin-standard": "4",
+    "git-commit-msg-linter": "^2.7.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
     "typescript": "^4.0.3"
   }
 }
