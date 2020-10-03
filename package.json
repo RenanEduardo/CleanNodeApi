@@ -4,10 +4,13 @@
   "main": "index.js",
   "author": "Renan Eduardo F. da Silva <renaneduardo1@hotmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "validator": "^13.1.17"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "@types/node": "^14 .11.2",
+    "@types/validator": "^13.1.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "6",
