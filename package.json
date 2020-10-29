@@ -4,10 +4,22 @@
   "main": "index.js",
   "author": "Renan Eduardo F. da Silva <renaneduardo1@hotmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "fast-glob": "^3.2.4",
+    "mongodb": "^3.6.2",
+    "validator": "^13.1.17"
+  },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.8",
     "@types/jest": "^26.0.14",
+    "@types/mongodb": "^3.5.28",
     "@types/node": "^14 .11.2",
+    "@types/supertest": "^2.0.10",
+    "@types/validator": "^13.1.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "6",
@@ -20,11 +32,18 @@
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.4.0",
+    "sucrase": "^3.16.0",
+    "supertest": "^5.0.0",
     "ts-jest": "^26.4.0",
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "test": "jest --passWithNoTests --watch",
-    "test:staged": "jest --passWithNoTests"
+    "start": "sucrase-node src/main/server.ts",
+    "test": "jest --no-cache --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:unit": "yarn test -- --watch -c jest-unit-config.js",
+    "test:integration": "yarn test -- --watch -c jest-integration-config.js",
+    "test:staged": "yarn test -- --findRelatedTests",
+    "test:ci": "yarn test -- --coverage"
   }
 }
