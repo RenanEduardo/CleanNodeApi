@@ -28,6 +28,7 @@ interface SutTypes {
   sut: DbAuthentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
 }
+
 const makeSut = (): SutTypes => {
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
   const sut = new DbAuthentication(loadAccountByEmailRepositoryStub)
@@ -36,6 +37,7 @@ const makeSut = (): SutTypes => {
     loadAccountByEmailRepositoryStub
   }
 }
+
 describe('DbAuthentication UseCase', () => {
   test('Should call LoadAccountbyEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
