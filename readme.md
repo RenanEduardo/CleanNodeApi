@@ -71,7 +71,7 @@ O objetivo do treinamento é mostrar como criar uma API com uma arquitetura bem 
 
 > ## Bibliotecas e Ferramentas
 
-* NPM
+* Yarn
 * Typescript
 * Git
 * Docker
