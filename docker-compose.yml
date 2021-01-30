@@ -7,13 +7,13 @@ services:
     volumes:
       - ./data:/data/db
     ports:
-      - "27017:27017"
+      - "27015:27015"
   api:
     container_name: api-container
-    build: .
-    image: clean-node-api
+    image: node:14
+    working_dir: /home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api
     restart: always
-    command: npm run debug
+    command: bash -c "yarn install --production && yarn debug"
     volumes:
       - ./dist:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/dist
       - ./package.json:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/package.json
