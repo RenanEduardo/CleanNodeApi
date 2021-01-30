@@ -15,7 +15,7 @@ services:
     restart: always
     command: bash -c "yarn install --production && yarn debug"
     volumes:
-      - ./dist:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/dist
+      - ./dist/:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/dist/
       - ./package.json:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/package.json
     ports:
       - "5050:5050"
