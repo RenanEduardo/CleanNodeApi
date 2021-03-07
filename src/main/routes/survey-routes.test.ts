@@ -25,7 +25,7 @@ describe('Survey Routes', () => {
   })
 
   describe('POST /surveys', () => {
-    test('Should return 403 on add survey without access token', async () => {
+    test('Should return 403 on add survey without accessToken', async () => {
       await request(app)
         .post('/api/surveys')
         .send({
@@ -43,7 +43,7 @@ describe('Survey Routes', () => {
         .expect(403)
     })
 
-    test('Should return 204 on add survey with valid access token', async () => {
+    test('Should return 204 on add survey with valid accessToken', async () => {
       const res = await accountCollection.insertOne({
         name: 'Renan',
         email: 'renan@mail.com',
@@ -52,7 +52,6 @@ describe('Survey Routes', () => {
       })
 
       const id = res.ops[0]._id
-      console.log('ID', id)
       const accessToken = sign({ id }, env.jwtSecret)
       console.log('AccessToken', accessToken)
 
@@ -84,10 +83,46 @@ describe('Survey Routes', () => {
   })
 
   describe('GET /surveys', () => {
-    test('Should return 403 on load surveys without access token', async () => {
+    test('Should return 403 on load surveys without accessToken', async () => {
       await request(app)
         .get('/api/surveys')
         .expect(403)
+    })
+
+    test('Should return 200 on load surveys with valid accessToken', async () => {
+      const res = await accountCollection.insertOne({
+        name: 'Renan',
+        email: 'renan@mail.com',
+        password: '123'
+      })
+
+      await surveyCollection.insertMany([{
+        question: 'any_question',
+        answers: [{
+          image: 'any_image',
+          answer: 'any_answer'
+        }, {
+          answer: 'other_answer'
+        }],
+        date: new Date()
+      }])
+
+      const id = res.ops[0]._id
+      const accessToken = sign({ id }, env.jwtSecret)
+      console.log('AccessToken', accessToken)
+
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+
+      await request(app)
+        .get('/api/surveys')
+        .set('x-access-token', accessToken)
+        .expect(200)
     })
   })
 })
