@@ -14,6 +14,8 @@ services:
     working_dir: /home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api
     restart: always
     command: bash -c "yarn install --production && yarn debug"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/clean-node-api
     volumes:
       - ./dist/:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/dist/
       - ./package.json:/home/Renan/Desktop/Estudos/Dockerfiles/clean-node-api/package.json
