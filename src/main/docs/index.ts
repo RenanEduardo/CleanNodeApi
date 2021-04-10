@@ -1,17 +1,17 @@
-import { loginPath, surveyPath, signUpPath } from './paths'
-import { unauthorized, badRequest, serverError, notFound, forbidden } from './components'
-import { apiKeyAuthSchema, accountSchema, errorSchema, loginParamsSchema, surveySchema, surveysSchema, surveyAnswerSchema, signUpParamsSchema } from './schemas'
+import paths from './paths'
+import components from './components'
+import schemas from './schemas'
 
 export default {
   openapi: '3.0.0',
   info: {
     title: 'Clean Node API',
-    description: 'API do curso do Mango para realizar enquete entre programadores',
+    description: 'API do curso do Mango para realizar enquetes entre programadores',
     version: '1.0.0'
   },
   license: {
-    name: 'MIT',
-    url: 'https://opensource.org/licenses/MIT'
+    name: 'GPL-3.0-or-later',
+    url: 'https://spdx.org/licenses/GPL-3.0-or-later.html'
   },
   servers: [{
     url: '/api'
@@ -19,30 +19,9 @@ export default {
   tags: [{
     name: 'Login'
   }, {
-    name: 'Enquetes'
+    name: 'Enquete'
   }],
-  paths: {
-    '/login': loginPath,
-    '/signup': signUpPath,
-    '/surveys': surveyPath
-  },
-  schemas: {
-    account: accountSchema,
-    loginParams: loginParamsSchema,
-    error: errorSchema,
-    surveys: surveysSchema,
-    survey: surveySchema,
-    surveyAnswer: surveyAnswerSchema,
-    signUpParams: signUpParamsSchema
-  },
-  components: {
-    securitySchemes: {
-      apiKeyAuth: apiKeyAuthSchema
-    },
-    badRequest: badRequest,
-    serverError: serverError,
-    unauthorized: unauthorized,
-    notFound: notFound,
-    forbidden: forbidden
-  }
+  paths,
+  schemas,
+  components
 }

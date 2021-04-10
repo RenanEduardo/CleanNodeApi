@@ -23,20 +23,19 @@ const makeSurvey = async (): Promise<SurveyModel> => {
     }],
     date: new Date()
   })
-
   return res.ops[0]
 }
+
 const makeAccount = async (): Promise<AccountModel> => {
   const res = await accountCollection.insertOne({
     name: 'any_name',
     email: 'any_email@mail.com',
     password: 'any_password'
   })
-
   return res.ops[0]
 }
 
-describe('Account Mongo Repository', () => {
+describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -50,15 +49,15 @@ describe('Account Mongo Repository', () => {
     await surveyCollection.deleteMany({})
     surveyResultCollection = await MongoHelper.getCollection('surveyResults')
     await surveyResultCollection.deleteMany({})
-    accountCollection = await MongoHelper.getCollection('account')
+    accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 
   describe('save()', () => {
     test('Should add a survey result if its new', async () => {
-      const sut = makeSut()
       const survey = await makeSurvey()
       const account = await makeAccount()
+      const sut = makeSut()
       const surveyResult = await sut.save({
         surveyId: survey.id,
         accountId: account.id,
@@ -70,8 +69,7 @@ describe('Account Mongo Repository', () => {
       expect(surveyResult.answer).toBe(survey.answers[0].answer)
     })
 
-    test('Should update a survey result if its not new', async () => {
-      const sut = makeSut()
+    test('Should update survey result if its not new', async () => {
       const survey = await makeSurvey()
       const account = await makeAccount()
       const res = await surveyResultCollection.insertOne({
@@ -80,6 +78,7 @@ describe('Account Mongo Repository', () => {
         answer: survey.answers[0].answer,
         date: new Date()
       })
+      const sut = makeSut()
       const surveyResult = await sut.save({
         surveyId: survey.id,
         accountId: account.id,

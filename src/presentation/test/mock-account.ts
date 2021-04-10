@@ -1,8 +1,8 @@
-import { AccountModel } from '@/domain/models/account'
 import { AddAccount, AddAccountParams } from '@/domain/usecases/account/add-account'
-import { AuthenticationParams, Authentication } from '@/domain/usecases/account/authentication'
-import { mockAccountModel } from '@/domain/test'
+import { Authentication, AuthenticationParams } from '@/domain/usecases/account/authentication'
 import { LoadAccountByToken } from '@/domain/usecases/account/load-account-by-token'
+import { AccountModel } from '@/domain/models/account'
+import { mockAccountModel } from '@/domain/test'
 
 export const mockAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -19,7 +19,6 @@ export const mockAuthentication = (): Authentication => {
       return Promise.resolve('any_token')
     }
   }
-
   return new AuthenticationStub()
 }
 

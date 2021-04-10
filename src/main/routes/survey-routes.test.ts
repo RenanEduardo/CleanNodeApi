@@ -1,8 +1,8 @@
-import env from '@/main/config/env'
 import app from '@/main/config/app'
+import env from '@/main/config/env'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
+import { Collection } from 'mongodb'
 import request from 'supertest'
 
 let surveyCollection: Collection
@@ -10,15 +10,13 @@ let accountCollection: Collection
 
 const makeAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
-    name: 'Renan',
-    email: 'renan@mail.com',
+    name: 'Rodrigo',
+    email: 'rodrigo.manguinho@gmail.com',
     password: '123',
     role: 'admin'
   })
-
   const id = res.ops[0]._id
   const accessToken = sign({ id }, env.jwtSecret)
-
   await accountCollection.updateOne({
     _id: id
   }, {
@@ -26,7 +24,6 @@ const makeAccessToken = async (): Promise<string> => {
       accessToken
     }
   })
-
   return accessToken
 }
 
@@ -52,15 +49,12 @@ describe('Survey Routes', () => {
         .post('/api/surveys')
         .send({
           question: 'Question',
-          answers: [
-            {
-              answer: 'Answer_1',
-              image: 'http://image-name.com'
-            },
-            {
-              answer: 'Answer_2'
-            }
-          ]
+          answers: [{
+            answer: 'Answer 1',
+            image: 'http://image-name.com'
+          }, {
+            answer: 'Answer 2'
+          }]
         })
         .expect(403)
     })
@@ -72,15 +66,12 @@ describe('Survey Routes', () => {
         .set('x-access-token', accessToken)
         .send({
           question: 'Question',
-          answers: [
-            {
-              answer: 'Answer_1',
-              image: 'http://image-name.com'
-            },
-            {
-              answer: 'Answer_2'
-            }
-          ]
+          answers: [{
+            answer: 'Answer 1',
+            image: 'http://image-name.com'
+          }, {
+            answer: 'Answer 2'
+          }]
         })
         .expect(204)
     })

@@ -8,7 +8,7 @@ const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
 }
 
-describe('Account Mongo Repository', () => {
+describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -23,7 +23,7 @@ describe('Account Mongo Repository', () => {
   })
 
   describe('add()', () => {
-    test('Should add a survey on add success', async () => {
+    test('Should add a survey on success', async () => {
       const sut = makeSut()
       await sut.add({
         question: 'any_question',
@@ -47,8 +47,6 @@ describe('Account Mongo Repository', () => {
         answers: [{
           image: 'any_image',
           answer: 'any_answer'
-        }, {
-          answer: 'other_answer'
         }],
         date: new Date()
       }, {
@@ -56,8 +54,6 @@ describe('Account Mongo Repository', () => {
         answers: [{
           image: 'other_image',
           answer: 'other_answer'
-        }, {
-          answer: 'any_answer'
         }],
         date: new Date()
       }])
@@ -83,8 +79,6 @@ describe('Account Mongo Repository', () => {
         answers: [{
           image: 'any_image',
           answer: 'any_answer'
-        }, {
-          answer: 'other_answer'
         }],
         date: new Date()
       })
@@ -92,12 +86,6 @@ describe('Account Mongo Repository', () => {
       const survey = await sut.loadById(res.ops[0]._id)
       expect(survey).toBeTruthy()
       expect(survey.id).toBeTruthy()
-    })
-
-    test('Should load empty list', async () => {
-      const sut = makeSut()
-      const surveys = await sut.loadAll()
-      expect(surveys.length).toBe(0)
     })
   })
 })

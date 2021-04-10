@@ -7,8 +7,8 @@ import { Authentication } from '@/domain/usecases/account/authentication'
 
 export const makeDbAuthentication = (): Authentication => {
   const salt = 12
-  const bcrytpAdapt = new BcryptAdapter(salt)
+  const bcryptAdapter = new BcryptAdapter(salt)
   const jwtAdapter = new JwtAdapter(env.jwtSecret)
   const accountMongoRepository = new AccountMongoRepository()
-  return new DbAuthentication(accountMongoRepository, bcrytpAdapt, jwtAdapter, accountMongoRepository)
+  return new DbAuthentication(accountMongoRepository, bcryptAdapter, jwtAdapter, accountMongoRepository)
 }

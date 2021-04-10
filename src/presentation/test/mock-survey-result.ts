@@ -1,5 +1,5 @@
-import { SurveyResultModel } from '@/domain/models/survey-result'
 import { SaveSurveyResult, SaveSurveyResultParams } from '@/domain/usecases/survey-result/save-survey-result'
+import { SurveyResultModel } from '@/domain/models/survey-result'
 import { mockSurveyResultModel } from '@/domain/test'
 
 export const mockSaveSurveyResult = (): SaveSurveyResult => {
@@ -8,6 +8,5 @@ export const mockSaveSurveyResult = (): SaveSurveyResult => {
       return Promise.resolve(mockSurveyResultModel())
     }
   }
-
   return new SaveSurveyResultStub()
 }

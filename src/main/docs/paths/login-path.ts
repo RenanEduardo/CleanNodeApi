@@ -13,7 +13,7 @@ export const loginPath = {
     },
     responses: {
       200: {
-        description: 'Successo',
+        description: 'Sucesso',
         content: {
           'application/json': {
             schema: {

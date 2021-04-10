@@ -1,8 +1,8 @@
-import env from '@/main/config/env'
 import app from '@/main/config/app'
+import env from '@/main/config/env'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
+import { Collection } from 'mongodb'
 import request from 'supertest'
 
 let surveyCollection: Collection
@@ -10,14 +10,12 @@ let accountCollection: Collection
 
 const makeAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
-    name: 'Renan',
-    email: 'renan@mail.com',
+    name: 'Rodrigo',
+    email: 'rodrigo.manguinho@gmail.com',
     password: '123'
   })
-
   const id = res.ops[0]._id
   const accessToken = sign({ id }, env.jwtSecret)
-
   await accountCollection.updateOne({
     _id: id
   }, {
@@ -25,11 +23,10 @@ const makeAccessToken = async (): Promise<string> => {
       accessToken
     }
   })
-
   return accessToken
 }
 
-describe('Save Survey Result Routes', () => {
+describe('Survey Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -59,22 +56,19 @@ describe('Save Survey Result Routes', () => {
       const accessToken = await makeAccessToken()
       const res = await surveyCollection.insertOne({
         question: 'Question',
-        answers: [
-          {
-            answer: 'Answer_1',
-            image: 'http://image-name.com'
-          },
-          {
-            answer: 'Answer_2'
-          }
-        ],
+        answers: [{
+          answer: 'Answer 1',
+          image: 'http://image-name.com'
+        }, {
+          answer: 'Answer 2'
+        }],
         date: new Date()
       })
       await request(app)
         .put(`/api/surveys/${res.ops[0]._id}/results`)
         .set('x-access-token', accessToken)
         .send({
-          answer: 'Answer_1'
+          answer: 'Answer 1'
         })
         .expect(200)
     })

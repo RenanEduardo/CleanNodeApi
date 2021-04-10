@@ -1,7 +1,7 @@
 export const signUpPath = {
   post: {
     tags: ['Login'],
-    summary: 'API para criar conta de  usuário',
+    summary: 'API para criar conta de um usuário',
     requestBody: {
       content: {
         'application/json': {
@@ -13,7 +13,7 @@ export const signUpPath = {
     },
     responses: {
       200: {
-        description: 'Successo',
+        description: 'Sucesso',
         content: {
           'application/json': {
             schema: {

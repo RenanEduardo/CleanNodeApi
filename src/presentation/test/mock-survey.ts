@@ -1,8 +1,8 @@
-import { SurveyModel } from '@/domain/models/survey'
-import { AddSurvey, AddSurveyParams } from '@/domain/usecases/survey/add-survey'
-import { LoadSurveys } from '@/domain/usecases/survey/load-surveys'
-import { mockSurveyModel, mockSurveyModels } from '@/domain/test'
+import { AddSurveyParams, AddSurvey } from '@/domain/usecases/survey/add-survey'
 import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
+import { LoadSurveys } from '@/domain/usecases/survey/load-surveys'
+import { SurveyModel } from '@/domain/models/survey'
+import { mockSurveyModels, mockSurveyModel } from '@/domain/test'
 
 export const mockAddSurvey = (): AddSurvey => {
   class AddSurveyStub implements AddSurvey {
@@ -10,7 +10,6 @@ export const mockAddSurvey = (): AddSurvey => {
       return Promise.resolve()
     }
   }
-
   return new AddSurveyStub()
 }
 
@@ -29,6 +28,5 @@ export const mockLoadSurveyById = (): LoadSurveyById => {
       return Promise.resolve(mockSurveyModel())
     }
   }
-
   return new LoadSurveyByIdStub()
 }

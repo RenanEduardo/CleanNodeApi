@@ -34,6 +34,7 @@ describe('Account Mongo Repository', () => {
       expect(account.password).toBe('any_password')
     })
   })
+
   describe('loadByEmail()', () => {
     test('Should return an account on loadByEmail success', async () => {
       const sut = makeSut()
@@ -53,7 +54,7 @@ describe('Account Mongo Repository', () => {
     })
   })
 
-  describe('updateAccessToken', () => {
+  describe('updateAccessToken()', () => {
     test('Should update the account accessToken on updateAccessToken success', async () => {
       const sut = makeSut()
       const res = await accountCollection.insertOne(mockAddAccountParams())
@@ -112,7 +113,7 @@ describe('Account Mongo Repository', () => {
       expect(account).toBeFalsy()
     })
 
-    test('Should return an account on loadByToken if user is admin', async () => {
+    test('Should return an account on loadByToken with if user is admin', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
         name: 'any_name',
@@ -131,7 +132,7 @@ describe('Account Mongo Repository', () => {
 
     test('Should return null if loadByToken fails', async () => {
       const sut = makeSut()
-      const account = await sut.loadByEmail('any_token')
+      const account = await sut.loadByToken('any_token')
       expect(account).toBeFalsy()
     })
   })
